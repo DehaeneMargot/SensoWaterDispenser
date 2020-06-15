@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>Project 1 - Margot De haene</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="msapplication-TileColor" content="#272453">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="apple-touch-icon" sizes="180x180" href="/Code/Frontend/apple-touch-icon.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="/Code/Frontend/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/Code/Frontend/favicon-16x16.png">
+        <link rel="manifest" href="/Code/Frontend/site.webmanifest">
+        <link rel="mask-icon" href="/Code/Frontend/safari-pinned-tab.svg" color="#272453">
+
+        <link rel="stylesheet" href="style/normalize.css">
+        <link rel="stylesheet" href="style/screen.css">
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.js" integrity="sha256-yr4fRk/GU1ehYJPAs8P4JlTgu0Hdsp4ZKrx8bDEDC3I=" crossorigin="anonymous"></script>
+        <script src="script/dataHandler.js"></script>
+        <script src="script/statistics.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+
+    </head>
+    <body>
+        <header class="o-row o-row__header">
+            <div class="o-container">
+                <div class="c-header">
+                    <div class="c-header__logo">
+                        <h1 class="c-logo">
+                          <svg class="c-logo__symbol" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 467.63 109.26">
+                            <defs>
+                                <style>.cls-1,.cls-2,.cls-3{fill:none;stroke-linecap:round;stroke-linejoin:round;}.cls-1{stroke:#1d2d52;stroke-width:10px;}.cls-2{stroke:#e46e3b;stroke-width:9px;}.cls-3{stroke:#59c3e6;stroke-width:12px;}</style>
+                            </defs>
+                            <g id="Layer_2" data-name="Layer 2">
+                                <g id="Laag_1" data-name="Laag 1">
+                                    <path class="cls-1" d="M407.23,26.7c.62-.77,6.57-7.46,7.19-8.23L424.89,5.53l30.37,38.18a38.94,38.94,0,0,1,7.37,22.51c.36,20.67-16.58,37.62-38,38-21,.41-38-17-38-38a38.14,38.14,0,0,1,3.21-15.33,48.45,48.45,0,0,1,6.94-10.72"/>
+                                    <circle class="cls-2" cx="376.8" cy="14.25" r="9.75"/>
+                                    <path class="cls-3" d="M74.09,50.92A36.86,36.86,0,0,0,6,52.56H6L74.55,79l.23.09a36.86,36.86,0,0,1-68.1,1.66"/>
+                                    <path class="cls-3" d="M351.52,50.92a36.86,36.86,0,0,0-68.09,1.64h0L352,79l.24.09a36.86,36.86,0,0,1-68.1,1.66"/>
+                                    <path class="cls-3" d="M156.89,91.63a36.87,36.87,0,1,1,10.52-25.79"/>
+                                    <line class="cls-3" x1="93.67" y1="65.84" x2="167.41" y2="65.84"/>
+                                    <path class="cls-3" d="M187.6,102.86V65.71a36.88,36.88,0,0,1,73.75,0v37.05"/>
+                                    <line class="cls-3" x1="187.6" y1="65.71" x2="187.6" y2="28.84"/>
+                                </g>
+                            </g>
+                          </svg>
+                        </h1>
+                    </div>
+                    <div class="c-header__nav">
+                        <nav class="c-nav">
+                            <ul class="o-list c-nav__list">
+                                <li class="c-nav__item"><a href="dashboard.html" class="c-nav__link c-link-cta">Dashboard</a></li>
+                                <li class="c-nav__item"><a href="container.html" class="c-nav__link c-link-cta">Container</a></li>
+                                <li class="c-nav__item is-selected"><a href="statistics.html" class="c-nav__link c-link-cta">Statistics</a></li>
+                            </ul>
+                        </nav>
+                        <a href="index.html" class="c-powerbutton c-nav__link--powerbutton c-nav__link"><svg class="c-nav__item" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M13 3h-2v10h2V3zm4.83 2.17l-1.42 1.42C17.99 7.86 19 9.81 19 12c0 3.87-3.13 7-7 7s-7-3.13-7-7c0-2.19 1.01-4.14 2.58-5.42L6.17 5.17C4.23 6.82 3 9.26 3 12c0 4.97 4.03 9 9 9s9-4.03 9-9c0-2.74-1.23-5.18-3.17-6.83z"/></svg></a>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <section class="o-row o-row--white">
+            <div class="o-container">
+                <div class="o-layout__item">
+                    <h1>
+                        Statistics
+                    </h1>
+                </div>
+                <div class="o-layout o-layout__item">
+                    <h6>
+                        Me
+                    </h6>
+                </div>
+                <div class="o-layout o-layout--gutter-lg">
+                    <div class="o-layout__item u-1-of-2-bp3">
+                        <div class="o-infoblock">
+                            <h3 class="c-lead">
+                                Total water consumption
+                            </h3>
+                            <p>
+                                <span class="js-total"></span>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="o-layout__item u-1-of-2-bp3">
+                        <div class="o-infoblock">
+                            <h3 class="c-lead">
+                                Average consumption / day
+                            </h3>
+                            <p>
+                                <span class="js-average"></span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="o-layout__item">
+                    <h2>
+                        Consumption
+                    </h2>
+                    <canvas id="chartConsumption" class="js-chartconsumption" width="300" height="100"></canvas>
+                </div>
+                <div class="o-layout__item">
+                    <h2>
+                        Goals
+                    </h2>
+                    <canvas id="myChart" class="js-chartgoals" width="300" height="100"></canvas>
+                </div>
+            </div>
+            <div class="o-container">
+                <div class="o-layout o-layout__item">
+                    <h6>
+                        Container
+                    </h6>
+                </div>
+                <div class="o-layout o-layout__item">
+                    <h2>
+                        Temperature
+                    </h2>
+                    <canvas id="myChart" class="js-charttemp" width="300" height="100"></canvas>
+                </div>
+            </div>
+        </section>
+        <section class="o-row o-row--xl o-row--blue">
+            <div class="o-container u-max-width-md">
+              <div class="o-section o-section--xl">
+                  <article class="o-layout o-layout--gutter-lg o-layout--align-center">
+                      <div class="o-layout__item">
+                      </div>
+                  </article>
+              </div>
+            </div>
+        </section>
+    </body>
+</html>
